@@ -19,7 +19,7 @@ namespace WebAPIArchitectureTemplate.Controllers
         public IHttpActionResult Get(int id)
         {
             var blogEntity = _blogService.GetById(id);
-            return blogEntity != null ? (IHttpActionResult)Ok(blogEntity) : NotFound();
+            return blogEntity != null ? (IHttpActionResult)Ok(blogEntity) : ActionResultHelper.StatusCodeWithMessage(HttpStatusCode.NotFound, $"Blog with id {id} not found!");
         }
 
         [HttpPost]
