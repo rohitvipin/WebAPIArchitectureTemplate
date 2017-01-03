@@ -69,5 +69,14 @@ namespace WebAPIArchitectureTemplate.Services.Implementations
                 return blog != null ? Mapper.Map<Blog, BlogEntity>(blog) : null;
             }
         }
+
+        public void Delete(int id)
+        {
+            using (var unitOfWork = new UnitOfWork())
+            {
+                unitOfWork.BlogRepository.Delete(id);
+                unitOfWork.Save();
+            }
+        }
     }
 }

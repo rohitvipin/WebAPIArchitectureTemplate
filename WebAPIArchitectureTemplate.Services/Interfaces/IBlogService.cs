@@ -10,5 +10,6 @@ namespace WebAPIArchitectureTemplate.Services.Interfaces
         void Insert(BlogEntity blogEntity);
         void Update(BlogEntity blogEntity);
         BlogEntity GetByName(string blogEntityName);
+        void Delete(int id);
     }
 }

@@ -19,7 +19,7 @@ namespace WebAPIArchitectureTemplate.Controllers
         public IHttpActionResult Get(int id)
         {
             var blogEntity = _blogService.GetById(id);
-            return blogEntity != null ? (IHttpActionResult) Ok(blogEntity) : NotFound();
+            return blogEntity != null ? (IHttpActionResult)Ok(blogEntity) : NotFound();
         }
 
         [HttpPost]
@@ -51,6 +51,29 @@ namespace WebAPIArchitectureTemplate.Controllers
                 return StatusCode(HttpStatusCode.NotAcceptable);
             }
             return Ok(blog);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                return StatusCode(HttpStatusCode.ExpectationFailed);
+            }
+
+            var blogEntity = _blogService.GetById(id);
+            if (blogEntity == null)
+            {
+                return NotFound();
+            }
+
+            _blogService.Delete(id);
+
+            if (_blogService.GetById(id) == null)
+            {
+                return Ok($"Blog Id {id} deleted successfully");
+            }
+            return StatusCode(HttpStatusCode.NotAcceptable);
         }
     }
 }
