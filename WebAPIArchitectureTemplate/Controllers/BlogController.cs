@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Web.Http;
+using WebAPIArchitectureTemplate.Services.Entities;
 using WebAPIArchitectureTemplate.Services.Implementations;
 using WebAPIArchitectureTemplate.Services.Interfaces;
 
@@ -14,6 +16,41 @@ namespace WebAPIArchitectureTemplate.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(int id) => Ok(_blogService.GetById(id));
+        public IHttpActionResult Get(int id)
+        {
+            var blogEntity = _blogService.GetById(id);
+            return blogEntity != null ? (IHttpActionResult) Ok(blogEntity) : NotFound();
+        }
+
+        [HttpPost]
+        public IHttpActionResult Save(BlogEntity blogEntity)
+        {
+            if (string.IsNullOrWhiteSpace(blogEntity?.Name))
+            {
+                return StatusCode(HttpStatusCode.ExpectationFailed);
+            }
+
+            if (_blogService.GetByName(blogEntity.Name) != null)
+            {
+                return StatusCode(HttpStatusCode.Conflict);
+            }
+
+            if (_blogService.GetById(blogEntity.Id) == null)
+            {
+                _blogService.Insert(blogEntity);
+            }
+            else
+            {
+                _blogService.Update(blogEntity);
+            }
+
+            var blog = _blogService.GetByName(blogEntity.Name);
+
+            if (blog == null)
+            {
+                return StatusCode(HttpStatusCode.NotAcceptable);
+            }
+            return Ok(blog);
+        }
     }
 }

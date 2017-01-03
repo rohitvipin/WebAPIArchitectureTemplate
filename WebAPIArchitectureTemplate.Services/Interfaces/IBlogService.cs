@@ -7,5 +7,8 @@ namespace WebAPIArchitectureTemplate.Services.Interfaces
     {
         IList<BlogEntity> GetAll();
         BlogEntity GetById(object id);
+        void Insert(BlogEntity blogEntity);
+        void Update(BlogEntity blogEntity);
+        BlogEntity GetByName(string blogEntityName);
     }
 }

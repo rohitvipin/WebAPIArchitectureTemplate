@@ -1,3 +1,5 @@
+using WebAPIArchitectureTemplate.Database.Models;
+
 namespace WebAPIArchitectureTemplate.Database
 {
     using System.Data.Entity;
@@ -19,6 +21,9 @@ namespace WebAPIArchitectureTemplate.Database
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
+
+        public virtual DbSet<Blog> BlogEntities { get; set; }
+        public virtual DbSet<Post> PostEntities { get; set; }
     }
 
     //public class MyEntity
