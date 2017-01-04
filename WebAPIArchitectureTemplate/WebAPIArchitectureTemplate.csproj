@@ -288,6 +288,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebAPIArchitectureTemplate.Logging\WebAPIArchitectureTemplate.Logging.csproj">
+      <Project>{42807EAB-2EF7-4CCB-B789-2A8ED4F0C6A5}</Project>
+      <Name>WebAPIArchitectureTemplate.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebAPIArchitectureTemplate.Services\WebAPIArchitectureTemplate.Services.csproj">
       <Project>{853811C6-7D47-4691-BB54-0A7932A0FAB0}</Project>
       <Name>WebAPIArchitectureTemplate.Services</Name>
