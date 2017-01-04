@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Web.Http.Results;
 
-namespace WebAPIArchitectureTemplate
+namespace WebAPIArchitectureTemplate.Helpers
 {
     public static class ActionResultHelper
     {

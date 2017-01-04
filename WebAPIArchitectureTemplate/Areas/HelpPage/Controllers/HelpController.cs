@@ -13,17 +13,24 @@ namespace WebAPIArchitectureTemplate.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
-        public HelpController()
-            : this(GlobalConfiguration.Configuration)
-        {
-        }
+        #region Comment code for Unity
+        //public HelpController()
+        //    : this(GlobalConfiguration.Configuration)
+        //{
+        //}
 
-        public HelpController(HttpConfiguration config)
-        {
-            Configuration = config;
-        }
+        //public HelpController(HttpConfiguration config)
+        //{
+        //    Configuration = config;
+        //}
 
-        public HttpConfiguration Configuration { get; private set; }
+        //public HttpConfiguration Configuration { get; private set; } 
+        #endregion
+
+        /// <summary>
+        /// New Configuration Property to be used with Unity
+        /// </summary>
+        protected static HttpConfiguration Configuration => GlobalConfiguration.Configuration;
 
         public ActionResult Index()
         {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Web.Http;
+using WebAPIArchitectureTemplate.Helpers;
 using WebAPIArchitectureTemplate.Logging;
 using WebAPIArchitectureTemplate.Services.Entities;
-using WebAPIArchitectureTemplate.Services.Implementations;
 using WebAPIArchitectureTemplate.Services.Interfaces;
 
 namespace WebAPIArchitectureTemplate.Controllers
@@ -12,9 +12,9 @@ namespace WebAPIArchitectureTemplate.Controllers
     {
         private readonly IBlogService _blogService;
 
-        public BlogController()
+        public BlogController(IBlogService blogService)
         {
-            _blogService = new BlogService();
+            _blogService = blogService;
         }
 
         [HttpGet]
