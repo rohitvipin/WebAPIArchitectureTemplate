@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.OData;
 using WebAPIArchitectureTemplate.Helpers;
 using WebAPIArchitectureTemplate.Logging;
 using WebAPIArchitectureTemplate.Services.Entities;
@@ -15,6 +16,26 @@ namespace WebAPIArchitectureTemplate.Controllers
         public BlogController(IBlogService blogService)
         {
             _blogService = blogService;
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                var blogEntities = _blogService.GetAll();
+                if (blogEntities?.Count > 0)
+                {
+                    return Ok(blogEntities);
+                }
+                return ActionResultHelper.StatusCodeWithMessage(HttpStatusCode.NoContent, "No blogs available");
+            }
+            catch (Exception exception)
+            {
+                ErrorLogger.LogError(exception);
+                return ActionResultHelper.StatusCodeWithMessage(HttpStatusCode.InternalServerError, exception.Message);
+            }
         }
 
         [HttpGet]
